@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Brand;
 use App\Entity\Car;
 use App\Entity\CarFleet;
 use App\Entity\Engine;
@@ -38,12 +39,15 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::section('Navigation');
+        yield MenuItem::linktoDashboard('Tableau de bord', 'fa fa-tachometer-alt');
+        yield MenuItem::linkToUrl('Accueil', 'fa fa-home', '/');
+        yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out-alt');
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Liste', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', User::class)->setAction('new');
         yield MenuItem::section('Locations');
-        yield MenuItem::linkToCrud('Liste', 'fas fa-car', Rental::class);
+        yield MenuItem::linkToCrud('Liste', 'fas fa-folder-open', Rental::class);
         yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', Rental::class)->setAction('new');
         yield MenuItem::section('Voitures');
         yield MenuItem::linkToCrud('Liste', 'fas fa-car', Car::class);
@@ -51,7 +55,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Status');
         yield MenuItem::linkToCrud('Liste', 'fas fa-thermometer', CarFleet::class);
         yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', CarFleet::class)->setAction('new');
-        
+        yield MenuItem::section('Marques');
+        yield MenuItem::linkToCrud('Liste', 'fas fa-copyright', Brand::class);
+        yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', Brand::class)->setAction('new'); 
         yield MenuItem::section('Moteurs');
         yield MenuItem::linkToCrud('Liste', 'fas fa-cogs', Engine::class);
         yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', Engine::class)->setAction('new');
@@ -61,8 +67,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Liste', 'fas fa-chair', Seat::class);
         yield MenuItem::linkToCrud('Ajout', 'fas fa-plus', Seat::class)->setAction('new');      
-        yield MenuItem::section();
-        yield MenuItem::linkToLogout('Déconnexion', 'fa fa-sign-out-alt');
 
         //yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

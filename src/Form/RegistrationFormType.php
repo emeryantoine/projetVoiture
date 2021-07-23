@@ -74,9 +74,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('submit',SubmitType::class,
+            ->add('Enregistrer',SubmitType::class,
             [
-            'label' => 'Enregistrer',
+            'label' => $options['button_label'],
             'attr' => ['class' => 'btn btn-outline-success']
             ]
             )
@@ -87,6 +87,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'button_label' =>''
         ]);
     }
 }
